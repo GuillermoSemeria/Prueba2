@@ -39,6 +39,14 @@ app.get('/libros/:id', (req, res) => {
   });
 });
 
+// Crear un nuevo registro
+app.post('/libros', (req, res) => {
+  const { nombre, editorial,autor,paginas,lanzamiento } = req.body;
+  connection.query(`INSERT INTO carros (nombre,editorial,autor,paginas,lanzamiento ) VALUES ('${nombre}', '${editorial}', '${autor}', '${paginas}', '${lanzamiento}')`, (error, results) => {
+    if (error) throw error;
+    res.send('Registro creado exitosamente');
+  });
+});
 
 app.listen(3000, () => {
     console.log('API escuchando en el puerto 3000');
