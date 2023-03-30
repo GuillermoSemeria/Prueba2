@@ -6,6 +6,14 @@ const connection = mysql.createConnection({
   database: 'libros'
 });
 
+// Leer todos los registros
+app.get('/libros', (req, res) => {
+  connection.query('SELECT * FROM libros', (error, results) => {
+    if (error) throw error;
+    res.send(results);
+  });
+});
+
 connection.connect((error) => {
   if (error) {
     console.log('Error al conectarse a la base de datos:', error);
