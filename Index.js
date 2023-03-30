@@ -30,6 +30,16 @@ app.get('/libros', (req, res) => {
   });
 });
 
+// Leer un registro por ID
+app.get('/libros/:id', (req, res) => {
+  const { id } = req.params;
+  connection.query(`SELECT * FROM libros WHERE id=${id}`, (error, results) => {
+    if (error) throw error;
+    res.send(results[0]);
+  });
+});
+
+
 app.listen(3000, () => {
     console.log('API escuchando en el puerto 3000');
   });
