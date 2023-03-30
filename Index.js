@@ -6,14 +6,6 @@ const connection = mysql.createConnection({
   database: 'libros'
 });
 
-// Leer todos los registros
-app.get('/libros', (req, res) => {
-  connection.query('SELECT * FROM libros', (error, results) => {
-    if (error) throw error;
-    res.send(results);
-  });
-});
-
 connection.connect((error) => {
   if (error) {
     console.log('Error al conectarse a la base de datos:', error);
@@ -29,6 +21,14 @@ const bodyParser = require('body-parser');
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+
+// Leer todos los registros
+app.get('/libros', (req, res) => {
+  connection.query('SELECT * FROM libros', (error, results) => {
+    if (error) throw error;
+    res.send(results);
+  });
+});
 
 app.listen(3000, () => {
     console.log('API escuchando en el puerto 3000');
